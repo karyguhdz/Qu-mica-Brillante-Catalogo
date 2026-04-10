@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function loadProducts(url) {
-  // Cambia el nombre del archivo aqui solo si renombraste products.json.
   try {
     const response = await fetch(url);
 
@@ -46,8 +45,6 @@ async function loadProducts(url) {
     const data = await response.json();
     return validateProducts(data);
   } catch (fetchError) {
-    // Algunos navegadores limitan fetch cuando index.html se abre desde file://.
-    // Este fallback intenta leer el JSON desde un iframe oculto en la misma carpeta.
     const iframeData = await loadProductsFromIframe(url);
 
     if (iframeData) {
@@ -152,6 +149,9 @@ function createProductCard(product) {
   const article = document.createElement("article");
   article.className = "product-card";
 
+  const presentationOptions = getPresentationOptions(product);
+  const defaultPresentation = presentationOptions[0];
+
   const imageList = Array.isArray(product.imagenes)
     ? product.imagenes.filter(Boolean)
     : product.imagen
@@ -165,7 +165,6 @@ function createProductCard(product) {
   image.loading = "lazy";
 
   image.addEventListener("error", () => {
-    // Si falta la imagen original, se reemplaza por un placeholder elegante.
     image.onerror = null;
     image.src = PLACEHOLDER_IMAGE;
     image.alt = `Imagen no disponible de ${product.nombre}`;
@@ -209,18 +208,29 @@ function createProductCard(product) {
   }
 
   const tagClass = product.etiqueta ? "product-card__tag" : "product-card__tag is-hidden";
-  const whatsappMessage = encodeURIComponent(
-    `Hola, me interesa el producto "${product.nombre}" en presentación ${product.presentacion}.`
-  );
 
   article.innerHTML = `
     <div class="product-card__body">
       <div class="${tagClass}">${product.etiqueta || "Disponible"}</div>
-      <h3>${product.nombre}</h3>
-      <p class="product-card__description">${product.descripcion}</p>
+      <h3>${escapeHtml(product.nombre)}</h3>
+      <p class="product-card__description">${escapeHtml(product.descripcion)}</p>
       <div class="product-card__meta">
         <span><strong>Categoría:</strong> ${formatCategory(product.categoria)}</span>
-        <span><strong>Presentación:</strong> ${product.presentacion}</span>
+        ${
+          presentationOptions.length > 1
+            ? `<label class="product-card__presentation">
+                <strong>Presentación:</strong>
+                <select class="product-card__select" data-presentation-select="${product.id}">
+                  ${presentationOptions
+                    .map(
+                      (option) =>
+                        `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`
+                    )
+                    .join("")}
+                </select>
+              </label>`
+            : `<span><strong>Presentación:</strong> ${escapeHtml(defaultPresentation)}</span>`
+        }
       </div>
       <div class="product-card__footer">
         <div class="product-card__actions">
@@ -228,8 +238,9 @@ function createProductCard(product) {
             Agregar al carrito
           </button>
           <a
-            class="button"
-            href="https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}"
+            class="button direct-whatsapp"
+            href="https://wa.me/${WHATSAPP_NUMBER}?text=${buildDirectProductMessage(product.nombre, defaultPresentation)}"
+            data-product-id="${product.id}"
             target="_blank"
             rel="noreferrer"
           >
@@ -262,7 +273,19 @@ function bindQuoteCartEvents() {
     }
 
     const productId = Number(button.dataset.productId);
-    addProductToQuote(productId);
+    const presentation = getSelectedPresentation(productId);
+    addProductToQuote(productId, presentation);
+  });
+
+  productGrid.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-presentation-select]");
+
+    if (!select) {
+      return;
+    }
+
+    const productId = Number(select.dataset.presentationSelect);
+    syncDirectWhatsappLink(productId, select.value);
   });
 
   quoteCartList.addEventListener("click", (event) => {
@@ -270,7 +293,7 @@ function bindQuoteCartEvents() {
     const qtyButton = event.target.closest("[data-qty-action]");
 
     if (removeButton) {
-      removeQuoteItem(Number(removeButton.dataset.removeId));
+      removeQuoteItem(Number(removeButton.dataset.removeId), removeButton.dataset.presentation);
       return;
     }
 
@@ -280,7 +303,11 @@ function bindQuoteCartEvents() {
 
     const productId = Number(qtyButton.dataset.productId);
     const action = qtyButton.dataset.qtyAction;
-    updateQuoteQuantity(productId, action === "increase" ? 1 : -1);
+    updateQuoteQuantity(
+      productId,
+      qtyButton.dataset.presentation,
+      action === "increase" ? 1 : -1
+    );
   });
 
   quoteCartClear.addEventListener("click", () => {
@@ -298,20 +325,24 @@ function bindQuoteCartEvents() {
   });
 }
 
-function addProductToQuote(productId) {
+function addProductToQuote(productId, presentation) {
   const product = allProducts.find((item) => item.id === productId);
 
   if (!product) {
     return;
   }
 
-  const existingItem = quoteItems.find((item) => item.id === productId);
+  const selectedPresentation = presentation || getPresentationOptions(product)[0];
+  const existingItem = quoteItems.find(
+    (item) => item.id === productId && item.presentacion === selectedPresentation
+  );
 
   if (existingItem) {
     existingItem.cantidad += 1;
   } else {
     quoteItems.push({
       id: product.id,
+      presentacion: selectedPresentation,
       cantidad: 1
     });
   }
@@ -321,14 +352,18 @@ function addProductToQuote(productId) {
   toggleQuoteCart(true);
 }
 
-function removeQuoteItem(productId) {
-  quoteItems = quoteItems.filter((item) => item.id !== productId);
+function removeQuoteItem(productId, presentation) {
+  quoteItems = quoteItems.filter(
+    (item) => !(item.id === productId && item.presentacion === presentation)
+  );
   persistQuoteItems();
   renderQuoteCart();
 }
 
-function updateQuoteQuantity(productId, change) {
-  const item = quoteItems.find((entry) => entry.id === productId);
+function updateQuoteQuantity(productId, presentation, change) {
+  const item = quoteItems.find(
+    (entry) => entry.id === productId && entry.presentacion === presentation
+  );
 
   if (!item) {
     return;
@@ -337,7 +372,7 @@ function updateQuoteQuantity(productId, change) {
   item.cantidad += change;
 
   if (item.cantidad <= 0) {
-    removeQuoteItem(productId);
+    removeQuoteItem(productId, presentation);
     return;
   }
 
@@ -367,7 +402,13 @@ function renderQuoteCart() {
       return;
     }
 
-    fragment.appendChild(createQuoteCartItem(product, item.cantidad));
+    fragment.appendChild(
+      createQuoteCartItem(
+        product,
+        item.presentacion || getPresentationOptions(product)[0],
+        item.cantidad
+      )
+    );
   });
 
   quoteCartList.appendChild(fragment);
@@ -375,7 +416,7 @@ function renderQuoteCart() {
   quoteCartSend.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildQuoteMessage()}`;
 }
 
-function createQuoteCartItem(product, cantidad) {
+function createQuoteCartItem(product, presentation, cantidad) {
   const item = document.createElement("li");
   item.className = "quote-cart__item";
 
@@ -387,17 +428,17 @@ function createQuoteCartItem(product, cantidad) {
   const imagePath = imageList[0] || PLACEHOLDER_IMAGE;
 
   item.innerHTML = `
-    <img class="quote-cart__item-image" src="${imagePath}" alt="${product.nombre}" />
+    <img class="quote-cart__item-image" src="${imagePath}" alt="${escapeHtml(product.nombre)}" />
     <div>
-      <h4>${product.nombre}</h4>
-      <p>${product.presentacion}</p>
+      <h4>${escapeHtml(product.nombre)}</h4>
+      <p>${escapeHtml(presentation)}</p>
       <div class="quote-cart__qty">
-        <button type="button" data-qty-action="decrease" data-product-id="${product.id}">-</button>
+        <button type="button" data-qty-action="decrease" data-product-id="${product.id}" data-presentation="${escapeHtml(presentation)}">-</button>
         <strong>${cantidad}</strong>
-        <button type="button" data-qty-action="increase" data-product-id="${product.id}">+</button>
+        <button type="button" data-qty-action="increase" data-product-id="${product.id}" data-presentation="${escapeHtml(presentation)}">+</button>
       </div>
     </div>
-    <button class="quote-cart__remove" type="button" data-remove-id="${product.id}">
+    <button class="quote-cart__remove" type="button" data-remove-id="${product.id}" data-presentation="${escapeHtml(presentation)}">
       Quitar
     </button>
   `;
@@ -424,7 +465,8 @@ function buildQuoteMessage() {
       return;
     }
 
-    lines.push(`${index + 1}. ${product.nombre} - Cantidad: ${item.cantidad} - ${product.presentacion}`);
+    const presentation = item.presentacion || getPresentationOptions(product)[0];
+    lines.push(`${index + 1}. ${product.nombre} - Cantidad: ${item.cantidad} - ${presentation}`);
   });
 
   lines.push("");
@@ -468,4 +510,48 @@ function formatCategory(category) {
   };
 
   return categoryMap[normalized] || category;
+}
+
+function getPresentationOptions(product) {
+  if (Array.isArray(product.presentaciones) && product.presentaciones.length > 0) {
+    return product.presentaciones;
+  }
+
+  return [product.presentacion || "Presentación por confirmar"];
+}
+
+function getSelectedPresentation(productId) {
+  const select = productGrid.querySelector(`[data-presentation-select="${productId}"]`);
+
+  if (select) {
+    return select.value;
+  }
+
+  const product = allProducts.find((item) => item.id === productId);
+  return product ? getPresentationOptions(product)[0] : "Presentación por confirmar";
+}
+
+function syncDirectWhatsappLink(productId, presentation) {
+  const link = productGrid.querySelector(`.direct-whatsapp[data-product-id="${productId}"]`);
+  const product = allProducts.find((item) => item.id === productId);
+
+  if (!link || !product) {
+    return;
+  }
+
+  link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildDirectProductMessage(product.nombre, presentation)}`;
+}
+
+function buildDirectProductMessage(productName, presentation) {
+  return encodeURIComponent(
+    `Hola, me interesa el producto "${productName}" en presentación ${presentation}.`
+  );
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }

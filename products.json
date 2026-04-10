@@ -178,7 +178,8 @@
     "nombre": "Cloro",
     "categoria": "desinfectantes",
     "descripcion": "Producto basico para desinfeccion de pisos y superficies.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagenes": [
       "images/demo-color-bottles.jpg",
@@ -192,7 +193,8 @@
     "nombre": "Pinol",
     "categoria": "desinfectantes",
     "descripcion": "Limpiador aromatizante para pisos y limpieza general.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/cloro-desinfectante.svg",
     "etiqueta": ""
@@ -202,7 +204,8 @@
     "nombre": "Limpiador multiusos",
     "categoria": "desinfectantes",
     "descripcion": "Ideal para uso diario en superficies de hogar y negocio.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/cloro-desinfectante.svg",
     "etiqueta": ""
@@ -212,7 +215,8 @@
     "nombre": "Detergente liquido ropa de color",
     "categoria": "detergentes",
     "descripcion": "Ayuda a cuidar prendas de color durante el lavado.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/detergente-liquido.svg",
     "etiqueta": ""
@@ -232,7 +236,8 @@
     "nombre": "Suavizante de telas",
     "categoria": "detergentes",
     "descripcion": "Deja aroma agradable y suavidad en cada lavado.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/detergente-liquido.svg",
     "etiqueta": ""
@@ -242,7 +247,8 @@
     "nombre": "Jabon para trastes",
     "categoria": "cocina",
     "descripcion": "Remueve grasa y residuos en utensilios y vajilla.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagenes": [
       "images/demo-cleaning-bucket.jpg",
@@ -256,7 +262,8 @@
     "nombre": "Jabon para manos",
     "categoria": "desinfectantes",
     "descripcion": "Opcion practica para higiene frecuente en casa o negocio.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/cloro-desinfectante.svg",
     "etiqueta": ""
@@ -266,7 +273,8 @@
     "nombre": "Limpia banos",
     "categoria": "baño",
     "descripcion": "Ayuda a remover suciedad comun en sanitarios y azulejos.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/limpiador-bano.svg",
     "etiqueta": "Mas vendido"
@@ -276,7 +284,8 @@
     "nombre": "Desengrasante parrillas",
     "categoria": "cocina",
     "descripcion": "Disuelve grasa pesada en parrillas, campanas y superficies de cocina.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/lavatrastes-cocina.svg",
     "etiqueta": ""
@@ -286,7 +295,8 @@
     "nombre": "Shampoo para auto",
     "categoria": "artículos de limpieza",
     "descripcion": "Limpieza exterior para vehiculos con acabado uniforme.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/accesorios-limpieza.svg",
     "etiqueta": ""
@@ -296,7 +306,8 @@
     "nombre": "Armor All",
     "categoria": "artículos de limpieza",
     "descripcion": "Producto para cuidado y mantenimiento de interiores automotrices.",
-    "presentacion": "1 envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/accesorios-limpieza.svg",
     "etiqueta": ""
@@ -316,7 +327,8 @@
     "nombre": "Limpia vidrios",
     "categoria": "baño",
     "descripcion": "Limpieza clara y sin marcas para espejos y cristales.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/limpiador-bano.svg",
     "etiqueta": ""
@@ -326,7 +338,8 @@
     "nombre": "Sarricida",
     "categoria": "baño",
     "descripcion": "Apoyo para limpieza profunda en superficies con sarro.",
-    "presentacion": "A granel o por envase",
+    "presentacion": "Litro",
+    "presentaciones": ["Litro", "Galon", "Porron"],
     "precio": "Cotizar",
     "imagen": "images/limpiador-bano.svg",
     "etiqueta": "Promocion"
