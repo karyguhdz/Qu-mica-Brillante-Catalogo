@@ -25,7 +25,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
   color: var(--slate-900);
   background:
     radial-gradient(circle at top left, rgba(255, 143, 203, 0.24), transparent 28%),
@@ -100,6 +100,16 @@ h3,
 p,
 ul {
   margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+.button,
+.filter-chip,
+.pill,
+.product-card__price {
+  font-family: "Sora", "Plus Jakarta Sans", sans-serif;
 }
 
 h1 {
