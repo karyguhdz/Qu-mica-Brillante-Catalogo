@@ -453,6 +453,7 @@ h1 {
   width: min(360px, calc(100% - 2rem));
   max-height: min(72vh, 640px);
   display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 0.9rem;
   padding: 1rem;
   border-radius: 24px;
@@ -498,7 +499,10 @@ h1 {
   padding: 0;
   display: grid;
   gap: 0.7rem;
-  overflow: auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.25rem;
 }
 
 .quote-cart__item {
@@ -647,5 +651,6 @@ h1 {
     left: 0.75rem;
     width: auto;
     bottom: 5.2rem;
+    max-height: calc(100vh - 7rem);
   }
 }
