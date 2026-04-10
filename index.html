@@ -80,7 +80,7 @@
           <div class="section-heading">
             <p class="eyebrow">Catalogo</p>
             <h2>Productos por categoria</h2>
-            <p>Los productos se cargan desde <code>products.json</code>.</p>
+            <p>Explora el catalogo, agrega productos y envia tu lista para cotizacion por WhatsApp.</p>
           </div>
 
           <div class="filter-bar" id="filterBar" aria-label="Filtros de productos">
@@ -157,6 +157,29 @@
         </div>
       </div>
     </footer>
+
+    <aside class="quote-cart" id="quoteCart" aria-label="Lista de cotizacion">
+      <div class="quote-cart__header">
+        <div>
+          <p class="eyebrow">Cotizacion</p>
+          <h3>Tu lista</h3>
+        </div>
+        <button class="quote-cart__toggle" id="quoteCartToggle" type="button" aria-expanded="false">
+          Ver lista
+        </button>
+      </div>
+      <p class="quote-cart__hint">Agrega productos y envia la lista por WhatsApp.</p>
+      <div class="quote-cart__empty" id="quoteCartEmpty">Todavia no agregas productos.</div>
+      <ul class="quote-cart__list" id="quoteCartList"></ul>
+      <div class="quote-cart__actions">
+        <button class="button button--ghost quote-cart__clear" id="quoteCartClear" type="button">
+          Vaciar lista
+        </button>
+        <a class="button quote-cart__send" id="quoteCartSend" href="#" target="_blank" rel="noreferrer">
+          Enviar cotizacion
+        </a>
+      </div>
+    </aside>
 
     <a
       class="floating-whatsapp"

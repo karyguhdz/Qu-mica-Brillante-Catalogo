@@ -5,16 +5,25 @@ const WHATSAPP_NUMBER = "528129053409";
 const productGrid = document.getElementById("productGrid");
 const filterBar = document.getElementById("filterBar");
 const statusMessage = document.getElementById("statusMessage");
+const quoteCart = document.getElementById("quoteCart");
+const quoteCartList = document.getElementById("quoteCartList");
+const quoteCartEmpty = document.getElementById("quoteCartEmpty");
+const quoteCartSend = document.getElementById("quoteCartSend");
+const quoteCartClear = document.getElementById("quoteCartClear");
+const quoteCartToggle = document.getElementById("quoteCartToggle");
 
 let allProducts = [];
 let currentFilter = "todos";
+let quoteItems = loadQuoteItems();
 
 document.addEventListener("DOMContentLoaded", async () => {
   bindFilterEvents();
+  bindQuoteCartEvents();
 
   try {
     allProducts = await loadProducts(PRODUCT_SOURCE);
     renderProducts(allProducts);
+    renderQuoteCart();
   } catch (error) {
     console.error("No fue posible cargar los productos:", error);
     showStatus(
@@ -213,14 +222,19 @@ function createProductCard(product) {
       </div>
       <div class="product-card__footer">
         <span class="product-card__price">${product.precio}</span>
-        <a
-          class="button"
-          href="https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Solicitar
-        </a>
+        <div class="product-card__actions">
+          <button class="button add-to-quote" type="button" data-product-id="${product.id}">
+            Agregar a cotizacion
+          </button>
+          <a
+            class="button"
+            href="https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Solicitar
+          </a>
+        </div>
       </div>
     </div>
   `;
@@ -236,4 +250,195 @@ function showStatus(message) {
 
 function hideStatus() {
   statusMessage.classList.add("is-hidden");
+}
+
+function bindQuoteCartEvents() {
+  productGrid.addEventListener("click", (event) => {
+    const button = event.target.closest(".add-to-quote");
+
+    if (!button) {
+      return;
+    }
+
+    const productId = Number(button.dataset.productId);
+    addProductToQuote(productId);
+  });
+
+  quoteCartList.addEventListener("click", (event) => {
+    const removeButton = event.target.closest("[data-remove-id]");
+    const qtyButton = event.target.closest("[data-qty-action]");
+
+    if (removeButton) {
+      removeQuoteItem(Number(removeButton.dataset.removeId));
+      return;
+    }
+
+    if (!qtyButton) {
+      return;
+    }
+
+    const productId = Number(qtyButton.dataset.productId);
+    const action = qtyButton.dataset.qtyAction;
+    updateQuoteQuantity(productId, action === "increase" ? 1 : -1);
+  });
+
+  quoteCartClear.addEventListener("click", () => {
+    quoteItems = [];
+    persistQuoteItems();
+    renderQuoteCart();
+  });
+
+  quoteCartToggle.addEventListener("click", () => {
+    const isCollapsed = quoteCart.classList.toggle("is-collapsed");
+    quoteCartToggle.textContent = isCollapsed ? "Abrir lista" : "Ver lista";
+    quoteCartToggle.setAttribute("aria-expanded", String(!isCollapsed));
+  });
+}
+
+function addProductToQuote(productId) {
+  const product = allProducts.find((item) => item.id === productId);
+
+  if (!product) {
+    return;
+  }
+
+  const existingItem = quoteItems.find((item) => item.id === productId);
+
+  if (existingItem) {
+    existingItem.cantidad += 1;
+  } else {
+    quoteItems.push({
+      id: product.id,
+      cantidad: 1
+    });
+  }
+
+  persistQuoteItems();
+  renderQuoteCart();
+  quoteCart.classList.remove("is-collapsed");
+  quoteCartToggle.textContent = "Ver lista";
+  quoteCartToggle.setAttribute("aria-expanded", "true");
+}
+
+function removeQuoteItem(productId) {
+  quoteItems = quoteItems.filter((item) => item.id !== productId);
+  persistQuoteItems();
+  renderQuoteCart();
+}
+
+function updateQuoteQuantity(productId, change) {
+  const item = quoteItems.find((entry) => entry.id === productId);
+
+  if (!item) {
+    return;
+  }
+
+  item.cantidad += change;
+
+  if (item.cantidad <= 0) {
+    removeQuoteItem(productId);
+    return;
+  }
+
+  persistQuoteItems();
+  renderQuoteCart();
+}
+
+function renderQuoteCart() {
+  quoteCartList.innerHTML = "";
+
+  if (quoteItems.length === 0) {
+    quoteCartEmpty.hidden = false;
+    quoteCartSend.setAttribute("aria-disabled", "true");
+    quoteCartSend.href = "#";
+    return;
+  }
+
+  quoteCartEmpty.hidden = true;
+  const fragment = document.createDocumentFragment();
+
+  quoteItems.forEach((item) => {
+    const product = allProducts.find((entry) => entry.id === item.id);
+
+    if (!product) {
+      return;
+    }
+
+    fragment.appendChild(createQuoteCartItem(product, item.cantidad));
+  });
+
+  quoteCartList.appendChild(fragment);
+  quoteCartSend.removeAttribute("aria-disabled");
+  quoteCartSend.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildQuoteMessage()}`;
+}
+
+function createQuoteCartItem(product, cantidad) {
+  const item = document.createElement("li");
+  item.className = "quote-cart__item";
+
+  const imageList = Array.isArray(product.imagenes)
+    ? product.imagenes.filter(Boolean)
+    : product.imagen
+      ? [product.imagen]
+      : [PLACEHOLDER_IMAGE];
+  const imagePath = imageList[0] || PLACEHOLDER_IMAGE;
+
+  item.innerHTML = `
+    <img class="quote-cart__item-image" src="${imagePath}" alt="${product.nombre}" />
+    <div>
+      <h4>${product.nombre}</h4>
+      <p>${product.presentacion}</p>
+      <div class="quote-cart__qty">
+        <button type="button" data-qty-action="decrease" data-product-id="${product.id}">-</button>
+        <strong>${cantidad}</strong>
+        <button type="button" data-qty-action="increase" data-product-id="${product.id}">+</button>
+      </div>
+    </div>
+    <button class="quote-cart__remove" type="button" data-remove-id="${product.id}">
+      Quitar
+    </button>
+  `;
+
+  const image = item.querySelector(".quote-cart__item-image");
+  image.addEventListener("error", () => {
+    image.onerror = null;
+    image.src = PLACEHOLDER_IMAGE;
+  });
+
+  return item;
+}
+
+function buildQuoteMessage() {
+  const lines = [
+    "Hola, quiero cotizar los siguientes productos:",
+    ""
+  ];
+
+  quoteItems.forEach((item, index) => {
+    const product = allProducts.find((entry) => entry.id === item.id);
+
+    if (!product) {
+      return;
+    }
+
+    lines.push(`${index + 1}. ${product.nombre} - Cantidad: ${item.cantidad} - ${product.presentacion}`);
+  });
+
+  lines.push("");
+  lines.push("Me comparten informacion, por favor.");
+
+  return encodeURIComponent(lines.join("\n"));
+}
+
+function persistQuoteItems() {
+  localStorage.setItem("quoteItems", JSON.stringify(quoteItems));
+}
+
+function loadQuoteItems() {
+  try {
+    const raw = localStorage.getItem("quoteItems");
+    return raw ? JSON.parse(raw) : [];
+  } catch (error) {
+    return [];
+  }
 }
