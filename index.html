@@ -158,14 +158,19 @@
       </div>
     </footer>
 
-    <aside class="quote-cart" id="quoteCart" aria-label="Lista de cotizacion">
+    <button class="quote-bubble" id="quoteBubble" type="button" aria-label="Abrir cotizacion">
+      <span class="quote-bubble__icon">+</span>
+      <span class="quote-bubble__count" id="quoteBubbleCount">0</span>
+    </button>
+
+    <aside class="quote-cart is-hidden-panel" id="quoteCart" aria-label="Lista de cotizacion">
       <div class="quote-cart__header">
         <div>
           <p class="eyebrow">Cotizacion</p>
           <h3>Tu lista</h3>
         </div>
-        <button class="quote-cart__toggle" id="quoteCartToggle" type="button" aria-expanded="false">
-          Ver lista
+        <button class="quote-cart__toggle" id="quoteCartToggle" type="button" aria-expanded="true">
+          Cerrar
         </button>
       </div>
       <p class="quote-cart__hint">Agrega productos y envia la lista por WhatsApp.</p>

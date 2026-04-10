@@ -11,6 +11,8 @@ const quoteCartEmpty = document.getElementById("quoteCartEmpty");
 const quoteCartSend = document.getElementById("quoteCartSend");
 const quoteCartClear = document.getElementById("quoteCartClear");
 const quoteCartToggle = document.getElementById("quoteCartToggle");
+const quoteBubble = document.getElementById("quoteBubble");
+const quoteBubbleCount = document.getElementById("quoteBubbleCount");
 
 let allProducts = [];
 let currentFilter = "todos";
@@ -289,9 +291,11 @@ function bindQuoteCartEvents() {
   });
 
   quoteCartToggle.addEventListener("click", () => {
-    const isCollapsed = quoteCart.classList.toggle("is-collapsed");
-    quoteCartToggle.textContent = isCollapsed ? "Abrir lista" : "Ver lista";
-    quoteCartToggle.setAttribute("aria-expanded", String(!isCollapsed));
+    toggleQuoteCart(false);
+  });
+
+  quoteBubble.addEventListener("click", () => {
+    toggleQuoteCart(true);
   });
 }
 
@@ -315,9 +319,7 @@ function addProductToQuote(productId) {
 
   persistQuoteItems();
   renderQuoteCart();
-  quoteCart.classList.remove("is-collapsed");
-  quoteCartToggle.textContent = "Ver lista";
-  quoteCartToggle.setAttribute("aria-expanded", "true");
+  toggleQuoteCart(true);
 }
 
 function removeQuoteItem(productId) {
@@ -346,6 +348,8 @@ function updateQuoteQuantity(productId, change) {
 
 function renderQuoteCart() {
   quoteCartList.innerHTML = "";
+  const totalItems = quoteItems.reduce((sum, item) => sum + item.cantidad, 0);
+  quoteBubbleCount.textContent = String(totalItems);
 
   if (quoteItems.length === 0) {
     quoteCartEmpty.hidden = false;
@@ -441,4 +445,10 @@ function loadQuoteItems() {
   } catch (error) {
     return [];
   }
+}
+
+function toggleQuoteCart(shouldOpen) {
+  quoteCart.classList.toggle("is-hidden-panel", !shouldOpen);
+  quoteCartToggle.textContent = shouldOpen ? "Cerrar" : "Cerrar";
+  quoteCartToggle.setAttribute("aria-expanded", String(shouldOpen));
 }

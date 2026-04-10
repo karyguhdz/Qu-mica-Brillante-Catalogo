@@ -446,14 +446,54 @@ h1 {
   color: #ffd5ef;
 }
 
-.quote-cart {
+.quote-bubble {
   position: fixed;
   right: 1rem;
   bottom: 5.8rem;
+  width: 68px;
+  height: 68px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #bb4697, #ff91cc);
+  color: var(--white);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  z-index: 22;
+}
+
+.quote-bubble__icon {
+  font-family: "Sora", "Plus Jakarta Sans", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.quote-bubble__count {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--blue-900);
+  font-size: 0.82rem;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(197, 79, 165, 0.18);
+}
+
+.quote-cart {
+  position: fixed;
+  top: 6.5rem;
+  right: 1rem;
+  bottom: 1rem;
   width: min(360px, calc(100% - 2rem));
-  max-height: min(72vh, 640px);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 0.9rem;
   padding: 1rem;
   border-radius: 24px;
@@ -463,6 +503,14 @@ h1 {
   backdrop-filter: blur(14px);
   z-index: 20;
   overflow: hidden;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+.quote-cart.is-hidden-panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
 }
 
 .quote-cart__header {
@@ -500,8 +548,8 @@ h1 {
   padding: 0;
   display: grid;
   gap: 0.7rem;
-  flex: 1 1 auto;
   min-height: 0;
+  align-content: start;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.25rem;
@@ -565,9 +613,10 @@ h1 {
 .quote-cart__actions {
   display: flex;
   gap: 0.7rem;
-  margin-top: auto;
-  padding-top: 0.2rem;
+  margin-top: 0;
+  padding-top: 0.35rem;
   background: rgba(255, 251, 254, 0.96);
+  border-top: 1px solid rgba(197, 79, 165, 0.1);
 }
 
 .quote-cart__actions > * {
@@ -652,10 +701,16 @@ h1 {
   }
 
   .quote-cart {
+    top: auto;
     right: 0.75rem;
     left: 0.75rem;
     width: auto;
     bottom: 5.2rem;
-    max-height: calc(100vh - 6.5rem);
+    height: calc(100vh - 6.5rem);
+  }
+
+  .quote-bubble {
+    right: 0.75rem;
+    bottom: 5.2rem;
   }
 }
