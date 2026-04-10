@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("No fue posible cargar los productos:", error);
     showStatus(
-      "No se pudo leer products.json. Revisa que el archivo exista y tenga formato JSON valido."
+      "No se pudo leer products.json. Revisa que el archivo exista y tenga formato JSON válido."
     );
   }
 });
@@ -40,7 +40,7 @@ async function loadProducts(url) {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Respuesta no valida: ${response.status}`);
+      throw new Error(`Respuesta no válida: ${response.status}`);
     }
 
     const data = await response.json();
@@ -134,7 +134,7 @@ function renderProducts(products) {
   productGrid.innerHTML = "";
 
   if (visibleProducts.length === 0) {
-    showStatus("No hay productos en esta categoria por el momento.");
+    showStatus("No hay productos en esta categoría por el momento.");
     return;
   }
 
@@ -210,7 +210,7 @@ function createProductCard(product) {
 
   const tagClass = product.etiqueta ? "product-card__tag" : "product-card__tag is-hidden";
   const whatsappMessage = encodeURIComponent(
-    `Hola, me interesa el producto "${product.nombre}" en presentacion ${product.presentacion}.`
+    `Hola, me interesa el producto "${product.nombre}" en presentación ${product.presentacion}.`
   );
 
   article.innerHTML = `
@@ -219,14 +219,13 @@ function createProductCard(product) {
       <h3>${product.nombre}</h3>
       <p class="product-card__description">${product.descripcion}</p>
       <div class="product-card__meta">
-        <span><strong>Categoria:</strong> ${product.categoria}</span>
-        <span><strong>Presentacion:</strong> ${product.presentacion}</span>
+        <span><strong>Categoría:</strong> ${formatCategory(product.categoria)}</span>
+        <span><strong>Presentación:</strong> ${product.presentacion}</span>
       </div>
       <div class="product-card__footer">
-        <span class="product-card__price">${product.precio}</span>
         <div class="product-card__actions">
           <button class="button add-to-quote" type="button" data-product-id="${product.id}">
-            Agregar a cotizacion
+            Agregar al carrito
           </button>
           <a
             class="button"
@@ -234,7 +233,7 @@ function createProductCard(product) {
             target="_blank"
             rel="noreferrer"
           >
-            Solicitar
+            Pedir por WhatsApp
           </a>
         </div>
       </div>
@@ -429,7 +428,7 @@ function buildQuoteMessage() {
   });
 
   lines.push("");
-  lines.push("Me comparten informacion, por favor.");
+  lines.push("Me comparten información, por favor.");
 
   return encodeURIComponent(lines.join("\n"));
 }
@@ -449,6 +448,24 @@ function loadQuoteItems() {
 
 function toggleQuoteCart(shouldOpen) {
   quoteCart.classList.toggle("is-hidden-panel", !shouldOpen);
-  quoteCartToggle.textContent = shouldOpen ? "Cerrar" : "Cerrar";
+  quoteBubble.classList.toggle("is-hidden", shouldOpen);
+  quoteCartToggle.textContent = "Cerrar";
   quoteCartToggle.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+function formatCategory(category) {
+  const normalized = String(category || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  const categoryMap = {
+    detergentes: "Detergentes",
+    desinfectantes: "Desinfectantes",
+    cocina: "Cocina",
+    bano: "Baño",
+    "articulos de limpieza": "Artículos de limpieza"
+  };
+
+  return categoryMap[normalized] || category;
 }
