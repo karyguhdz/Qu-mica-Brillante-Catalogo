@@ -1,0 +1,12 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" rx="36" fill="#F3FCFF"/>
+  <path d="M222 297h196l-24 64H246l-24-64Z" fill="#3DA5D9"/>
+  <path d="M283 128h20v169h-20z" fill="#0D3B66"/>
+  <path d="M337 102h20v195h-20z" fill="#12744D"/>
+  <rect x="247" y="264" width="60" height="32" rx="12" fill="#3CCF91"/>
+  <rect x="331" y="244" width="78" height="53" rx="16" fill="#0D3B66"/>
+  <path d="M363 176c18 0 33 15 33 33v31h-66v-31c0-18 15-33 33-33Z" fill="#3DA5D9"/>
+  <text x="320" y="417" text-anchor="middle" fill="#0D3B66" font-family="Trebuchet MS, Segoe UI, sans-serif" font-size="30" font-weight="700">
+    Articulos de limpieza
+  </text>
+</svg>

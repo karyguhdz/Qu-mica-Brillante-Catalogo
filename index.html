@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Catalogo de productos de limpieza para negocio pequeno con filtros por categoria y contacto directo por WhatsApp."
+    />
+    <title>Quimica Brillante | Catalogo de Limpieza</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__content">
+        <div class="brand-block">
+          <!-- Cambia aqui el logo, el nombre del negocio y el eslogan principal -->
+          <img
+            class="brand-block__logo"
+            src="images/logo-quimica-brillante.jpeg"
+            alt="Logo de Quimica Brillante"
+          />
+          <div>
+            <p class="eyebrow">Catalogo de limpieza profesional</p>
+            <h1>Quimica Brillante</h1>
+            <p class="subtitle">Soluciones confiables para hogar, oficina y negocio.</p>
+          </div>
+        </div>
+        <!-- Cambia el numero de WhatsApp en este enlace y en script.js -->
+        <a
+          class="button button--whatsapp"
+          href="https://wa.me/528128953409?text=Hola%2C%20quiero%20informacion%20sobre%20sus%20productos%20de%20limpieza."
+          target="_blank"
+          rel="noreferrer"
+        >
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <!-- Cambia aqui el mensaje principal de venta -->
+            <p class="hero__tag">Entrega rapida | Precios competitivos</p>
+            <h2>Todo lo que necesitas para mantener tus espacios impecables.</h2>
+            <p>
+              Catalogo visual, claro y listo para compartir con clientes desde celular.
+              Explora productos, combos y promociones en segundos.
+            </p>
+            <p class="hero__shipping">
+              Contamos con envio a domicilio en Apodaca y zonas cercanas.
+            </p>
+            <div class="hero__actions">
+              <a class="button" href="#catalogo">Ver catalogo</a>
+              <a class="button button--ghost" href="#promociones">Ver promociones</a>
+            </div>
+          </div>
+          <aside class="hero__card">
+            <span class="pill">Venta al detalle y mayoreo</span>
+            <h3>Compra facil y rapida</h3>
+            <ul>
+              <li>Productos para cocina, bano y limpieza general</li>
+              <li>Etiquetas destacadas para promociones y mas vendidos</li>
+              <li>Botones directos para cotizacion por WhatsApp</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="filters" id="catalogo">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Catalogo</p>
+            <h2>Productos por categoria</h2>
+            <p>Los productos se cargan desde <code>products.json</code>.</p>
+          </div>
+
+          <div class="filter-bar" id="filterBar" aria-label="Filtros de productos">
+            <button class="filter-chip is-active" data-filter="todos" type="button">Todos</button>
+            <button class="filter-chip" data-filter="detergentes" type="button">Detergentes</button>
+            <button class="filter-chip" data-filter="desinfectantes" type="button">Desinfectantes</button>
+            <button class="filter-chip" data-filter="cocina" type="button">Cocina</button>
+            <button class="filter-chip" data-filter="baño" type="button">Baño</button>
+            <button class="filter-chip" data-filter="artículos de limpieza" type="button">
+              Articulos de limpieza
+            </button>
+          </div>
+
+          <div class="status-message" id="statusMessage">Cargando productos...</div>
+          <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="promotions" id="promociones">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Promociones</p>
+            <h2>Combos para vender mas</h2>
+            <p>
+              <!-- Cambia estos textos si quieres mostrar promociones reales del negocio -->
+              Usa esta seccion para impulsar ticket promedio o destacar ofertas semanales.
+            </p>
+          </div>
+
+          <div class="promo-grid">
+            <article class="promo-card">
+              <span class="pill pill--green">Combo hogar</span>
+              <h3>Kit cocina + desinfeccion</h3>
+              <p>Lavatrastes, desengrasante y sanitizante con precio especial por paquete.</p>
+              <strong>$110</strong>
+            </article>
+            <article class="promo-card">
+              <span class="pill pill--blue">Mayoreo</span>
+              <h3>Paquete negocio pequeno</h3>
+              <p>Detergente concentrado, cloro y microfibras para limpieza diaria.</p>
+              <strong>$235</strong>
+            </article>
+            <article class="promo-card">
+              <span class="pill pill--mint">Promocion semanal</span>
+              <h3>Banos impecables</h3>
+              <p>Limpiador antisarro y limpiavidrios con descuento por tiempo limitado.</p>
+              <strong>$82</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__grid">
+        <div>
+          <h3>Quimica Brillante</h3>
+          <p>Productos de limpieza para hogar, oficina, escuela y negocio.</p>
+          <p>
+            <strong>Direccion:</strong> Niquel 227, Col. Nuevo Las Puentes, Apodaca,
+            Nuevo Leon, sobre Av. Nuevo Las Puentes.
+          </p>
+          <p><strong>Servicio:</strong> Contamos con envio a domicilio.</p>
+        </div>
+        <div>
+          <!-- Cambia telefono, WhatsApp y redes en este bloque -->
+          <p><strong>Telefono:</strong> <a href="tel:+528129053409">81 2905 3409</a></p>
+          <p>
+            <strong>WhatsApp:</strong>
+            <a href="https://wa.me/528129053409" target="_blank" rel="noreferrer">81 2905 3409</a>
+          </p>
+          <p><strong>Facebook:</strong> <a href="#" aria-label="Facebook del negocio">La quimica Brillante</a></p>
+          <p><strong>Instagram:</strong> <a href="#" aria-label="Instagram del negocio">@quimica_brillante6</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      class="floating-whatsapp"
+      href="https://wa.me/528129053409?text=Hola%2C%20quiero%20cotizar%20productos%20de%20limpieza."
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Abrir WhatsApp"
+    >
+      WA
+    </a>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" rx="36" fill="url(#bg)"/>
+  <circle cx="487" cy="122" r="88" fill="#ffffff" fill-opacity="0.18"/>
+  <circle cx="142" cy="403" r="114" fill="#ffffff" fill-opacity="0.12"/>
+  <rect x="108" y="122" width="424" height="236" rx="26" fill="#ffffff" fill-opacity="0.82"/>
+  <path d="M241 273c0-28.719 23.281-52 52-52h54c28.719 0 52 23.281 52 52v16H241v-16Z" fill="#3DA5D9"/>
+  <path d="M274 192c0-14.359 11.641-26 26-26h40c14.359 0 26 11.641 26 26v31h-92v-31Z" fill="#3CCF91"/>
+  <path d="M214 332h212" stroke="#0D3B66" stroke-width="18" stroke-linecap="round"/>
+  <text x="320" y="393" text-anchor="middle" fill="#0D3B66" font-family="Trebuchet MS, Segoe UI, sans-serif" font-size="30" font-weight="700">
+    Imagen no disponible
+  </text>
+  <defs>
+    <linearGradient id="bg" x1="59" y1="21" x2="569" y2="465" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9F3FF"/>
+      <stop offset="1" stop-color="#E5FFF3"/>
+    </linearGradient>
+  </defs>
+</svg>

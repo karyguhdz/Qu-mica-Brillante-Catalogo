@@ -1,0 +1,11 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" rx="36" fill="#ECF8FF"/>
+  <rect x="206" y="135" width="228" height="220" rx="36" fill="#ffffff" fill-opacity="0.94"/>
+  <rect x="236" y="107" width="168" height="58" rx="22" fill="#3DA5D9"/>
+  <path d="M264 267c0-31.48 25.52-57 57-57h9c31.48 0 57 25.52 57 57v29H264v-29Z" fill="#0D3B66"/>
+  <path d="M311 190c0-16.016 12.984-29 29-29h29v21c0 16.016-12.984 29-29 29h-29v-21Z" fill="#3CCF91"/>
+  <path d="M288 308h106" stroke="#3DA5D9" stroke-width="14" stroke-linecap="round"/>
+  <text x="320" y="417" text-anchor="middle" fill="#0D3B66" font-family="Trebuchet MS, Segoe UI, sans-serif" font-size="30" font-weight="700">
+    Limpieza para bano
+  </text>
+</svg>

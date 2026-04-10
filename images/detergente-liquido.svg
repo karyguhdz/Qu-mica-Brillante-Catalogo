@@ -1,0 +1,10 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="480" rx="36" fill="#EAF8FF"/>
+  <rect x="215" y="126" width="212" height="238" rx="34" fill="#3DA5D9"/>
+  <rect x="268" y="89" width="106" height="54" rx="18" fill="#0D3B66"/>
+  <rect x="243" y="190" width="156" height="96" rx="22" fill="#ffffff" fill-opacity="0.88"/>
+  <path d="M320 216c-20.435 0-37 16.565-37 37s16.565 37 37 37 37-16.565 37-37-16.565-37-37-37Zm0 22c8.284 0 15 6.716 15 15 0 3.942-1.521 7.529-4.01 10.208l-21.198-21.198A14.943 14.943 0 0 1 320 238Z" fill="#3CCF91"/>
+  <text x="320" y="419" text-anchor="middle" fill="#0D3B66" font-family="Trebuchet MS, Segoe UI, sans-serif" font-size="30" font-weight="700">
+    Detergente liquido
+  </text>
+</svg>

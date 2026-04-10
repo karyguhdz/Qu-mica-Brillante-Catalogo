@@ -1,0 +1,364 @@
+[
+  {
+    "id": 1,
+    "nombre": "Escoba chica",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Escoba ligera para limpieza diaria en espacios pequenos.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagenes": [
+      "images/demo-cleaning-bucket.jpg",
+      "images/demo-color-bottles.jpg",
+      "images/accesorios-limpieza.svg"
+    ],
+    "etiqueta": ""
+  },
+  {
+    "id": 2,
+    "nombre": "Escoba mediana",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Ideal para casa, oficina o pequenos negocios.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 3,
+    "nombre": "Escoba grande",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Cobertura amplia para limpieza rapida de pisos.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 4,
+    "nombre": "Trapeador magitel",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Trapeador resistente para limpieza general de pisos.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 5,
+    "nombre": "Trapeador fibra colores trenzada",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Fibra trenzada con buena absorcion para uso frecuente.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 6,
+    "nombre": "Trapeador microfibra colores",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Retiene polvo y humedad con acabado suave.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 7,
+    "nombre": "Trapeador microfibra espanola baston aluminio",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Modelo practico con baston de aluminio para mayor durabilidad.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/Trapeador Español.jpeg",
+    "etiqueta": "Mas vendido"
+  },
+  {
+    "id": 8,
+    "nombre": "Tina roja",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Tina practica para labores de limpieza en hogar o negocio.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 9,
+    "nombre": "Tina con exprimidor",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Ideal para trapeado eficiente con menor esfuerzo.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": "Mas vendido"
+  },
+  {
+    "id": 10,
+    "nombre": "Avion",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Herramienta auxiliar de jarcieria para limpieza y manejo de residuos.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 11,
+    "nombre": "Microfibra 40 x 40 cm",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Pano de microfibra para polvo, vidrio y superficies delicadas.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 12,
+    "nombre": "Microfibra 50 x 100 cm",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Tamano amplio para secado y limpieza en mayor superficie.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 13,
+    "nombre": "Fibra verde",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Fibra abrasiva para remover suciedad adherida.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 14,
+    "nombre": "Fibra verde con esponja",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Combinacion practica para tallado y limpieza cotidiana.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 15,
+    "nombre": "Esponja carro chica",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Esponja suave para lavado de auto y superficies delicadas.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 16,
+    "nombre": "Esponja carro grande",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Mayor cobertura para limpieza exterior de vehiculos.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 17,
+    "nombre": "Guantes rojos y amarillos",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Guantes para proteger manos durante labores de limpieza.",
+    "presentacion": "1 par",
+    "precio": "Cotizar",
+    "imagen": "images/Guantes Amarillos..jpeg",
+    "etiqueta": ""
+  },
+  {
+    "id": 18,
+    "nombre": "Cloro",
+    "categoria": "desinfectantes",
+    "descripcion": "Producto basico para desinfeccion de pisos y superficies.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagenes": [
+      "images/demo-color-bottles.jpg",
+      "images/demo-spray-marble.jpg",
+      "images/cloro-desinfectante.svg"
+    ],
+    "etiqueta": "Mas vendido"
+  },
+  {
+    "id": 19,
+    "nombre": "Pinol",
+    "categoria": "desinfectantes",
+    "descripcion": "Limpiador aromatizante para pisos y limpieza general.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/cloro-desinfectante.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 20,
+    "nombre": "Limpiador multiusos",
+    "categoria": "desinfectantes",
+    "descripcion": "Ideal para uso diario en superficies de hogar y negocio.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/cloro-desinfectante.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 21,
+    "nombre": "Detergente liquido ropa de color",
+    "categoria": "detergentes",
+    "descripcion": "Ayuda a cuidar prendas de color durante el lavado.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/detergente-liquido.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 22,
+    "nombre": "Detergente en polvo multiusos",
+    "categoria": "detergentes",
+    "descripcion": "Opcion rendidora para lavado y limpieza general.",
+    "presentacion": "Bolsa o porcion",
+    "precio": "Cotizar",
+    "imagen": "images/detergente-polvo.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 23,
+    "nombre": "Suavizante de telas",
+    "categoria": "detergentes",
+    "descripcion": "Deja aroma agradable y suavidad en cada lavado.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/detergente-liquido.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 24,
+    "nombre": "Jabon para trastes",
+    "categoria": "cocina",
+    "descripcion": "Remueve grasa y residuos en utensilios y vajilla.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagenes": [
+      "images/demo-cleaning-bucket.jpg",
+      "images/demo-spray-marble.jpg",
+      "images/lavatrastes-cocina.svg"
+    ],
+    "etiqueta": "Mas vendido"
+  },
+  {
+    "id": 25,
+    "nombre": "Jabon para manos",
+    "categoria": "desinfectantes",
+    "descripcion": "Opcion practica para higiene frecuente en casa o negocio.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/cloro-desinfectante.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 26,
+    "nombre": "Limpia banos",
+    "categoria": "baño",
+    "descripcion": "Ayuda a remover suciedad comun en sanitarios y azulejos.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/limpiador-bano.svg",
+    "etiqueta": "Mas vendido"
+  },
+  {
+    "id": 27,
+    "nombre": "Desengrasante parrillas",
+    "categoria": "cocina",
+    "descripcion": "Disuelve grasa pesada en parrillas, campanas y superficies de cocina.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/lavatrastes-cocina.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 28,
+    "nombre": "Shampoo para auto",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Limpieza exterior para vehiculos con acabado uniforme.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 29,
+    "nombre": "Armor All",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Producto para cuidado y mantenimiento de interiores automotrices.",
+    "presentacion": "1 envase",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 30,
+    "nombre": "Abrillantador de llantas",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Mejora la apariencia de llantas con acabado brillante.",
+    "presentacion": "1 envase",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 31,
+    "nombre": "Limpia vidrios",
+    "categoria": "baño",
+    "descripcion": "Limpieza clara y sin marcas para espejos y cristales.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/limpiador-bano.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 32,
+    "nombre": "Sarricida",
+    "categoria": "baño",
+    "descripcion": "Apoyo para limpieza profunda en superficies con sarro.",
+    "presentacion": "A granel o por envase",
+    "precio": "Cotizar",
+    "imagen": "images/limpiador-bano.svg",
+    "etiqueta": "Promocion"
+  },
+  {
+    "id": 33,
+    "nombre": "Aromatizante Glade",
+    "categoria": "desinfectantes",
+    "descripcion": "Aporta aroma agradable para espacios de hogar y negocio.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/cloro-desinfectante.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 34,
+    "nombre": "Wise",
+    "categoria": "artículos de limpieza",
+    "descripcion": "Articulo disponible en tienda. Ajusta esta descripcion segun la presentacion real.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/accesorios-limpieza.svg",
+    "etiqueta": ""
+  },
+  {
+    "id": 35,
+    "nombre": "Bicarbonato Ajax Liom",
+    "categoria": "cocina",
+    "descripcion": "Producto auxiliar para limpieza y mantenimiento en distintas superficies.",
+    "presentacion": "1 pieza",
+    "precio": "Cotizar",
+    "imagen": "images/lavatrastes-cocina.svg",
+    "etiqueta": ""
+  }
+]
