@@ -452,8 +452,8 @@ h1 {
   bottom: 5.8rem;
   width: min(360px, calc(100% - 2rem));
   max-height: min(72vh, 640px);
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  display: flex;
+  flex-direction: column;
   gap: 0.9rem;
   padding: 1rem;
   border-radius: 24px;
@@ -462,6 +462,7 @@ h1 {
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
   z-index: 20;
+  overflow: hidden;
 }
 
 .quote-cart__header {
@@ -499,6 +500,7 @@ h1 {
   padding: 0;
   display: grid;
   gap: 0.7rem;
+  flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -563,6 +565,9 @@ h1 {
 .quote-cart__actions {
   display: flex;
   gap: 0.7rem;
+  margin-top: auto;
+  padding-top: 0.2rem;
+  background: rgba(255, 251, 254, 0.96);
 }
 
 .quote-cart__actions > * {
@@ -651,6 +656,6 @@ h1 {
     left: 0.75rem;
     width: auto;
     bottom: 5.2rem;
-    max-height: calc(100vh - 7rem);
+    max-height: calc(100vh - 6.5rem);
   }
 }
