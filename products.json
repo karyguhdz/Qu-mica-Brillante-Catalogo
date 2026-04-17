@@ -142,7 +142,6 @@
     "precio": "Cotizar",
     "etiqueta": "",
     "imagenes": [
-      "images/Escoba mediana 1.jpeg",
       "images/Escoba Mediana.jpeg",
       "images/Escoba mediana 2.jpeg"
     ]
@@ -159,8 +158,8 @@
     "precio": "Cotizar",
     "etiqueta": "",
     "imagenes": [
-      "images/Esponja con textura vers?til - Tallon.png",
-      "images/Esponja con textura vers?til - Tallon 1.png"
+      "images/Esponja con textura versátil - Tallon.png",
+      "images/Esponja con textura versátil - Tallon 1.png"
     ]
   },
   {
@@ -174,7 +173,7 @@
     "presentacion": "Grande o peque?a",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": "images/aEsponja para carro grande.jpeg"
+    "imagen": "images/Esponja para carro grande.jpeg"
   },
   {
     "id": 13,
@@ -614,8 +613,8 @@
     "precio": "Cotizar",
     "etiqueta": "",
     "imagenes": [
-      "images/Higi?nico Dalia jumbo 360 mts c6.png",
-      "images/Higi?nico Dalia jumbo 360 mts c6 1.png"
+      "images/Higiénico Dalia jumbo 360 mts c6.png",
+      "images/Higiénico Dalia jumbo 360 mts c6 1.png"
     ]
   },
   {

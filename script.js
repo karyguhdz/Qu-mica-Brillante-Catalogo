@@ -1,6 +1,18 @@
 const PRODUCT_SOURCE = "products.json";
 const PLACEHOLDER_IMAGE = "images/placeholder-product.svg";
 const WHATSAPP_NUMBER = "528129053409";
+const IMAGE_PATH_ALIASES = {
+  "images/Escoba mediana 1.jpeg": "images/Escoba Mediana.jpeg",
+  "images/Esponja con textura vers?til - Tallon.png":
+    "images/Esponja con textura versátil - Tallon.png",
+  "images/Esponja con textura vers?til - Tallon 1.png":
+    "images/Esponja con textura versátil - Tallon 1.png",
+  "images/aEsponja para carro grande.jpeg": "images/Esponja para carro grande.jpeg",
+  "images/Higi?nico Dalia jumbo 360 mts c6.png":
+    "images/Higiénico Dalia jumbo 360 mts c6.png",
+  "images/Higi?nico Dalia jumbo 360 mts c6 1.png":
+    "images/Higiénico Dalia jumbo 360 mts c6 1.png"
+};
 
 const productGrid = document.getElementById("productGrid");
 const filterBar = document.getElementById("filterBar");
@@ -611,7 +623,10 @@ function getPresentationOptions(product) {
 }
 
 function getProductImages(product) {
-  const normalizeImagePath = (path) => encodeURI(String(path));
+  const normalizeImagePath = (path) => {
+    const normalizedPath = IMAGE_PATH_ALIASES[String(path)] || String(path);
+    return encodeURI(normalizedPath);
+  };
 
   if (Array.isArray(product.imagenes) && product.imagenes.length > 0) {
     return product.imagenes.filter(Boolean).map(normalizeImagePath);
@@ -655,12 +670,12 @@ function moveLightbox(direction) {
 
 function renderImageLightbox() {
   const imagePath = currentLightboxImages[currentLightboxIndex] || PLACEHOLDER_IMAGE;
-  imageLightboxImage.src = imagePath;
-  imageLightboxImage.alt = `${currentLightboxTitle} imagen ${currentLightboxIndex + 1}`;
   imageLightboxImage.onerror = () => {
     imageLightboxImage.onerror = null;
     imageLightboxImage.src = PLACEHOLDER_IMAGE;
   };
+  imageLightboxImage.alt = `${currentLightboxTitle} imagen ${currentLightboxIndex + 1}`;
+  imageLightboxImage.src = imagePath;
   imageLightboxTitle.textContent = currentLightboxTitle;
   imageLightboxDots.innerHTML = "";
 
