@@ -118,15 +118,17 @@
     "presentacion": "1 pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Escoba industrial.jpeg",
-     "images/Escoba industrial 2.jpeg",
-     "images/Escoba industrial 3.jpeg",
-     "images/Escoba industrial 4.jpeg",
-     "images/Escoba industrial 5.jpeg",
+    "imagen": [
+      "images/Escoba industrial.jpeg",
+      "images/Escoba industrial 2.jpeg",
+      "images/Escoba industrial 3.jpeg",
+      "images/Escoba industrial 4.jpeg",
+      "images/Escoba industrial 5.jpeg",
       "images/Escoba industrial 6.jpeg",
       "images/Escoba industrial 7.jpeg",
-      "images/Escoba industrial 8.jpeg",  
-      "images/Escoba industrial 9.jpeg"]
+      "images/Escoba industrial 8.jpeg",
+      "images/Escoba industrial 9.jpeg"
+    ]
   },
   {
     "id": 10,
@@ -156,8 +158,10 @@
     "presentacion": "1 pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Esponja con textura versátil - Tallon.jpeg"
-     ,"images/Esponja con textura versátil - Tallon 1.jpeg"]
+    "imagenes": [
+      "images/Esponja con textura vers?til - Tallon.png",
+      "images/Esponja con textura vers?til - Tallon 1.png"
+    ]
   },
   {
     "id": 12,
@@ -222,8 +226,10 @@
     "presentacion": "Jumbo o chica",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Fibra de acero - Tallon.jpeg",
-     "images/Fibra de acero - Tallon 1.jpeg"]
+    "imagenes": [
+      "images/Fibra de acero - Tallon.png",
+      "images/Fibra de acero - Tallon 1.png"
+    ]
   },
   {
     "id": 17,
@@ -249,9 +255,10 @@
     "presentacion": "1 pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Fibra esponja multiusos - Tallon.png",
-     "images/Fibra esponja multiusos - Tallon .png"]
-     
+    "imagenes": [
+      "images/Fibra esponja multiusos - Tallon.png",
+      "images/Fibra esponja multiusos - Tallon 1.png"
+    ]
   },
   {
     "id": 19,
@@ -264,7 +271,7 @@
     "presentacion": "Caja 12 pz o pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": "images/Fibra verde con esponja Scotch-Brite P94.jpeg"
+    "imagen": "images/Fibra verde con esponja Scotch-Brite P94.png"
   },
   {
     "id": 20,
@@ -277,7 +284,7 @@
     "presentacion": "Caja 12 pz o pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": "images/Fibra verde Scotch-Brite - Scotch-Brite P96.jpeg"
+    "imagen": "images/Fibra verde Scotch-Brite - Scotch-Brite P96.png"
   },
   {
     "id": 21,
@@ -306,9 +313,9 @@
     "presentacion": "1 pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": [
-      "images/Limpia vasos - Tallon.jpeg",
-     "images/Limpia vasos - Tallon 1.jpeg"
+    "imagenes": [
+      "images/Limpia vasos - Tallon.png",
+      "images/Limpia vasos - Tallon 1.png"
     ]
   },
   {
@@ -473,8 +480,10 @@
     "presentacion": "1 pieza",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Escoba grande arcoíris.jpeg",
-     "images/Escoba grande arcoíris 2.jpeg"]
+    "imagenes": [
+      "images/Escoba grande arcoiris.jpeg",
+      "images/Escoba grande arcoiris 1.jpeg"
+    ]
   },
   {
     "id": 35,
@@ -604,9 +613,9 @@
     "presentacion": "360 mts c/6",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": [
-      "images/Higiénico Dalia jumbo 360 mts c/6.jpeg",
-     "images/Higiénico Dalia jumbo 360 mts c6 1.jpeg"
+    "imagenes": [
+      "images/Higi?nico Dalia jumbo 360 mts c6.png",
+      "images/Higi?nico Dalia jumbo 360 mts c6 1.png"
     ]
   },
   {
@@ -724,8 +733,10 @@
     "presentacion": "1 paquete",
     "precio": "Cotizar",
     "etiqueta": "",
-    "imagen": ["images/Toalla interdoblada Sanita 1.jpeg",
-     "images/Toalla interdoblada Sanita.jpeg"]
+    "imagenes": [
+      "images/Toalla interdoblada Sanita.png",
+      "images/Toalla interdoblada Sanita 1.png"
+    ]
   },
   {
     "id": 54,

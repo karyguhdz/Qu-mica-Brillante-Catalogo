@@ -611,16 +611,18 @@ function getPresentationOptions(product) {
 }
 
 function getProductImages(product) {
+  const normalizeImagePath = (path) => encodeURI(String(path));
+
   if (Array.isArray(product.imagenes) && product.imagenes.length > 0) {
-    return product.imagenes.filter(Boolean);
+    return product.imagenes.filter(Boolean).map(normalizeImagePath);
   }
 
   if (Array.isArray(product.imagen) && product.imagen.length > 0) {
-    return product.imagen.filter(Boolean);
+    return product.imagen.filter(Boolean).map(normalizeImagePath);
   }
 
   if (typeof product.imagen === "string" && product.imagen.trim()) {
-    return [product.imagen];
+    return [normalizeImagePath(product.imagen)];
   }
 
   return [PLACEHOLDER_IMAGE];
