@@ -184,36 +184,63 @@ function createProductCard(product) {
   imageWrapper.appendChild(image);
 
   if (safeImageList.length > 1) {
-    const gallery = document.createElement("div");
-    gallery.className = "product-card__thumbs";
+    let currentImageIndex = 0;
+    const controls = document.createElement("div");
+    controls.className = "product-card__gallery";
 
-    safeImageList.forEach((imagePath, index) => {
-      const thumb = document.createElement("button");
-      thumb.type = "button";
-      thumb.className = `product-card__thumb${index === 0 ? " is-active" : ""}`;
-      thumb.setAttribute("aria-label", `Ver imagen ${index + 1} de ${product.nombre}`);
+    const prevButton = document.createElement("button");
+    prevButton.type = "button";
+    prevButton.className = "product-card__arrow product-card__arrow--prev";
+    prevButton.setAttribute("aria-label", `Ver imagen anterior de ${product.nombre}`);
+    prevButton.innerHTML = "&#8249;";
 
-      const thumbImage = document.createElement("img");
-      thumbImage.src = imagePath;
-      thumbImage.alt = `${product.nombre} vista ${index + 1}`;
-      thumbImage.loading = "lazy";
-      thumbImage.addEventListener("error", () => {
-        thumbImage.onerror = null;
-        thumbImage.src = PLACEHOLDER_IMAGE;
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "product-card__arrow product-card__arrow--next";
+    nextButton.setAttribute("aria-label", `Ver imagen siguiente de ${product.nombre}`);
+    nextButton.innerHTML = "&#8250;";
+
+    const dots = document.createElement("div");
+    dots.className = "product-card__dots";
+
+    const dotButtons = safeImageList.map((imagePath, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = `product-card__dot${index === 0 ? " is-active" : ""}`;
+      dot.setAttribute("aria-label", `Ver imagen ${index + 1} de ${product.nombre}`);
+
+      dot.addEventListener("click", () => {
+        currentImageIndex = index;
+        updateGallery();
       });
 
-      thumb.addEventListener("click", () => {
-        image.src = imagePath;
-        const thumbs = gallery.querySelectorAll(".product-card__thumb");
-        thumbs.forEach((item) => item.classList.remove("is-active"));
-        thumb.classList.add("is-active");
-      });
-
-      thumb.appendChild(thumbImage);
-      gallery.appendChild(thumb);
+      dots.appendChild(dot);
+      return dot;
     });
 
-    imageWrapper.appendChild(gallery);
+    const updateGallery = () => {
+      const imagePath = safeImageList[currentImageIndex] || PLACEHOLDER_IMAGE;
+      image.src = imagePath;
+      dotButtons.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === currentImageIndex);
+      });
+    };
+
+    prevButton.addEventListener("click", () => {
+      currentImageIndex =
+        (currentImageIndex - 1 + safeImageList.length) % safeImageList.length;
+      updateGallery();
+    });
+
+    nextButton.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex + 1) % safeImageList.length;
+      updateGallery();
+    });
+
+    controls.appendChild(prevButton);
+    controls.appendChild(dots);
+    controls.appendChild(nextButton);
+    imageWrapper.appendChild(controls);
   }
 
   const tagClass = product.etiqueta ? "product-card__tag" : "product-card__tag is-hidden";
