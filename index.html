@@ -223,13 +223,15 @@
         <button class="image-lightbox__close" id="imageLightboxClose" type="button" aria-label="Cerrar">
           ×
         </button>
-        <button class="image-lightbox__arrow image-lightbox__arrow--prev" id="imageLightboxPrev" type="button" aria-label="Imagen anterior">
-          &#8249;
-        </button>
-        <img class="image-lightbox__image" id="imageLightboxImage" src="" alt="" />
-        <button class="image-lightbox__arrow image-lightbox__arrow--next" id="imageLightboxNext" type="button" aria-label="Imagen siguiente">
-          &#8250;
-        </button>
+        <div class="image-lightbox__stage">
+          <button class="image-lightbox__arrow image-lightbox__arrow--prev" id="imageLightboxPrev" type="button" aria-label="Imagen anterior">
+            &#8249;
+          </button>
+          <img class="image-lightbox__image" id="imageLightboxImage" src="" alt="" />
+          <button class="image-lightbox__arrow image-lightbox__arrow--next" id="imageLightboxNext" type="button" aria-label="Imagen siguiente">
+            &#8250;
+          </button>
+        </div>
         <div class="image-lightbox__footer">
           <p class="image-lightbox__title" id="imageLightboxTitle"></p>
           <div class="image-lightbox__dots" id="imageLightboxDots"></div>

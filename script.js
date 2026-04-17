@@ -655,6 +655,10 @@ function renderImageLightbox() {
   const imagePath = currentLightboxImages[currentLightboxIndex] || PLACEHOLDER_IMAGE;
   imageLightboxImage.src = imagePath;
   imageLightboxImage.alt = `${currentLightboxTitle} imagen ${currentLightboxIndex + 1}`;
+  imageLightboxImage.onerror = () => {
+    imageLightboxImage.onerror = null;
+    imageLightboxImage.src = PLACEHOLDER_IMAGE;
+  };
   imageLightboxTitle.textContent = currentLightboxTitle;
   imageLightboxDots.innerHTML = "";
 
