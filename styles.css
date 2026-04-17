@@ -715,6 +715,12 @@ h1 {
   place-items: center;
 }
 
+.image-lightbox.is-hidden-panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .image-lightbox__backdrop {
   position: absolute;
   inset: 0;

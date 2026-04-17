@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindFilterEvents();
   bindQuoteCartEvents();
   bindImageLightboxEvents();
+  closeImageLightbox();
 
   try {
     allProducts = await loadProducts(PRODUCT_SOURCE);
