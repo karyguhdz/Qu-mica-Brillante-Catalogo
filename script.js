@@ -14,14 +14,26 @@ const quoteCartExcel = document.getElementById("quoteCartExcel");
 const quoteCartToggle = document.getElementById("quoteCartToggle");
 const quoteBubble = document.getElementById("quoteBubble");
 const quoteBubbleCount = document.getElementById("quoteBubbleCount");
+const imageLightbox = document.getElementById("imageLightbox");
+const imageLightboxBackdrop = document.getElementById("imageLightboxBackdrop");
+const imageLightboxClose = document.getElementById("imageLightboxClose");
+const imageLightboxPrev = document.getElementById("imageLightboxPrev");
+const imageLightboxNext = document.getElementById("imageLightboxNext");
+const imageLightboxImage = document.getElementById("imageLightboxImage");
+const imageLightboxTitle = document.getElementById("imageLightboxTitle");
+const imageLightboxDots = document.getElementById("imageLightboxDots");
 
 let allProducts = [];
 let currentFilter = "todos";
 let quoteItems = loadQuoteItems();
+let currentLightboxImages = [];
+let currentLightboxIndex = 0;
+let currentLightboxTitle = "";
 
 document.addEventListener("DOMContentLoaded", async () => {
   bindFilterEvents();
   bindQuoteCartEvents();
+  bindImageLightboxEvents();
 
   try {
     allProducts = await loadProducts(PRODUCT_SOURCE);
@@ -181,7 +193,19 @@ function createProductCard(product) {
 
   const imageWrapper = document.createElement("div");
   imageWrapper.className = "product-card__image";
+  imageWrapper.role = "button";
+  imageWrapper.tabIndex = 0;
+  imageWrapper.setAttribute("aria-label", `Abrir galería de ${product.nombre}`);
   imageWrapper.appendChild(image);
+  imageWrapper.addEventListener("click", () => {
+    openImageLightbox(safeImageList, 0, product.nombre);
+  });
+  imageWrapper.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openImageLightbox(safeImageList, 0, product.nombre);
+    }
+  });
 
   if (safeImageList.length > 1) {
     let currentImageIndex = 0;
@@ -226,13 +250,15 @@ function createProductCard(product) {
       });
     };
 
-    prevButton.addEventListener("click", () => {
+    prevButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       currentImageIndex =
         (currentImageIndex - 1 + safeImageList.length) % safeImageList.length;
       updateGallery();
     });
 
-    nextButton.addEventListener("click", () => {
+    nextButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       currentImageIndex = (currentImageIndex + 1) % safeImageList.length;
       updateGallery();
     });
@@ -290,6 +316,31 @@ function createProductCard(product) {
 
   article.prepend(imageWrapper);
   return article;
+}
+
+function bindImageLightboxEvents() {
+  imageLightboxBackdrop.addEventListener("click", closeImageLightbox);
+  imageLightboxClose.addEventListener("click", closeImageLightbox);
+  imageLightboxPrev.addEventListener("click", () => moveLightbox(-1));
+  imageLightboxNext.addEventListener("click", () => moveLightbox(1));
+
+  document.addEventListener("keydown", (event) => {
+    if (imageLightbox.classList.contains("is-hidden-panel")) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeImageLightbox();
+    }
+
+    if (event.key === "ArrowLeft") {
+      moveLightbox(-1);
+    }
+
+    if (event.key === "ArrowRight") {
+      moveLightbox(1);
+    }
+  });
 }
 
 function showStatus(message) {
@@ -573,6 +624,51 @@ function getProductImages(product) {
   }
 
   return [PLACEHOLDER_IMAGE];
+}
+
+function openImageLightbox(images, startIndex, title) {
+  currentLightboxImages = images;
+  currentLightboxIndex = startIndex;
+  currentLightboxTitle = title;
+  imageLightbox.classList.remove("is-hidden-panel");
+  imageLightbox.setAttribute("aria-hidden", "false");
+  renderImageLightbox();
+}
+
+function closeImageLightbox() {
+  imageLightbox.classList.add("is-hidden-panel");
+  imageLightbox.setAttribute("aria-hidden", "true");
+}
+
+function moveLightbox(direction) {
+  if (currentLightboxImages.length <= 1) {
+    return;
+  }
+
+  currentLightboxIndex =
+    (currentLightboxIndex + direction + currentLightboxImages.length) %
+    currentLightboxImages.length;
+  renderImageLightbox();
+}
+
+function renderImageLightbox() {
+  const imagePath = currentLightboxImages[currentLightboxIndex] || PLACEHOLDER_IMAGE;
+  imageLightboxImage.src = imagePath;
+  imageLightboxImage.alt = `${currentLightboxTitle} imagen ${currentLightboxIndex + 1}`;
+  imageLightboxTitle.textContent = currentLightboxTitle;
+  imageLightboxDots.innerHTML = "";
+
+  currentLightboxImages.forEach((_, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = `image-lightbox__dot${index === currentLightboxIndex ? " is-active" : ""}`;
+    dot.setAttribute("aria-label", `Ver imagen ${index + 1}`);
+    dot.addEventListener("click", () => {
+      currentLightboxIndex = index;
+      renderImageLightbox();
+    });
+    imageLightboxDots.appendChild(dot);
+  });
 }
 
 function getProductSku(product) {

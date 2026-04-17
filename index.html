@@ -217,6 +217,26 @@
       </div>
     </aside>
 
+    <div class="image-lightbox is-hidden-panel" id="imageLightbox" aria-hidden="true">
+      <button class="image-lightbox__backdrop" id="imageLightboxBackdrop" type="button" aria-label="Cerrar visor"></button>
+      <div class="image-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Galería de imágenes">
+        <button class="image-lightbox__close" id="imageLightboxClose" type="button" aria-label="Cerrar">
+          ×
+        </button>
+        <button class="image-lightbox__arrow image-lightbox__arrow--prev" id="imageLightboxPrev" type="button" aria-label="Imagen anterior">
+          &#8249;
+        </button>
+        <img class="image-lightbox__image" id="imageLightboxImage" src="" alt="" />
+        <button class="image-lightbox__arrow image-lightbox__arrow--next" id="imageLightboxNext" type="button" aria-label="Imagen siguiente">
+          &#8250;
+        </button>
+        <div class="image-lightbox__footer">
+          <p class="image-lightbox__title" id="imageLightboxTitle"></p>
+          <div class="image-lightbox__dots" id="imageLightboxDots"></div>
+        </div>
+      </div>
+    </div>
+
     <a
       class="floating-whatsapp"
       href="https://wa.me/528129053409?text=Hola%2C%20quiero%20pedir%20informaci%C3%B3n%20sobre%20sus%20productos%20de%20limpieza."
