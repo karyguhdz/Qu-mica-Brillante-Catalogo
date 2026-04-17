@@ -743,7 +743,10 @@ h1 {
 
 .image-lightbox__image {
   grid-area: image;
+  display: block;
   width: 100%;
+  height: min(68vh, 560px);
+  min-height: 260px;
   max-height: calc(100vh - 10rem);
   object-fit: contain;
   border-radius: 20px;
@@ -952,6 +955,8 @@ h1 {
 
   .image-lightbox__image {
     width: 100%;
+    height: min(58vh, 420px);
+    min-height: 220px;
     max-width: 100%;
     max-height: calc(100vh - 12rem);
     justify-self: center;
