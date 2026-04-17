@@ -10,6 +10,7 @@ const quoteCartList = document.getElementById("quoteCartList");
 const quoteCartEmpty = document.getElementById("quoteCartEmpty");
 const quoteCartSend = document.getElementById("quoteCartSend");
 const quoteCartClear = document.getElementById("quoteCartClear");
+const quoteCartExcel = document.getElementById("quoteCartExcel");
 const quoteCartToggle = document.getElementById("quoteCartToggle");
 const quoteBubble = document.getElementById("quoteBubble");
 const quoteBubbleCount = document.getElementById("quoteBubbleCount");
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     allProducts = await loadProducts(PRODUCT_SOURCE);
+    renderFilterButtons(allProducts);
     renderProducts(allProducts);
     renderQuoteCart();
   } catch (error) {
@@ -113,6 +115,19 @@ function bindFilterEvents() {
     updateActiveFilter(button);
     renderProducts(allProducts);
   });
+}
+
+function renderFilterButtons(products) {
+  const categories = [...new Set(products.map((product) => product.categoria).filter(Boolean))];
+  filterBar.innerHTML = `
+    <button class="filter-chip is-active" data-filter="todos" type="button">Todos</button>
+    ${categories
+      .map(
+        (category) =>
+          `<button class="filter-chip" data-filter="${escapeHtml(category)}" type="button">${escapeHtml(category)}</button>`
+      )
+      .join("")}
+  `;
 }
 
 function updateActiveFilter(activeButton) {
@@ -213,6 +228,7 @@ function createProductCard(product) {
     <div class="product-card__body">
       <div class="${tagClass}">${product.etiqueta || "Disponible"}</div>
       <h3>${escapeHtml(product.nombre)}</h3>
+      <p class="product-card__sku">SKU: ${getProductSku(product)}</p>
       <p class="product-card__description">${escapeHtml(product.descripcion)}</p>
       <div class="product-card__meta">
         <span><strong>Categoría:</strong> ${formatCategory(product.categoria)}</span>
@@ -316,6 +332,10 @@ function bindQuoteCartEvents() {
     renderQuoteCart();
   });
 
+  quoteCartExcel.addEventListener("click", () => {
+    downloadQuoteExcel();
+  });
+
   quoteCartToggle.addEventListener("click", () => {
     toggleQuoteCart(false);
   });
@@ -389,6 +409,7 @@ function renderQuoteCart() {
     quoteCartEmpty.hidden = false;
     quoteCartSend.setAttribute("aria-disabled", "true");
     quoteCartSend.href = "#";
+    quoteCartExcel.disabled = true;
     return;
   }
 
@@ -414,6 +435,7 @@ function renderQuoteCart() {
   quoteCartList.appendChild(fragment);
   quoteCartSend.removeAttribute("aria-disabled");
   quoteCartSend.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${buildQuoteMessage()}`;
+  quoteCartExcel.disabled = false;
 }
 
 function createQuoteCartItem(product, presentation, cantidad) {
@@ -466,7 +488,9 @@ function buildQuoteMessage() {
     }
 
     const presentation = item.presentacion || getPresentationOptions(product)[0];
-    lines.push(`${index + 1}. ${product.nombre} - Cantidad: ${item.cantidad} - ${presentation}`);
+    lines.push(
+      `${index + 1}. ${product.nombre} - SKU: ${getProductSku(product)} - Cantidad: ${item.cantidad} - ${presentation}`
+    );
   });
 
   lines.push("");
@@ -520,6 +544,23 @@ function getPresentationOptions(product) {
   return [product.presentacion || "Presentación por confirmar"];
 }
 
+function getProductSku(product) {
+  if (product.sku) {
+    return product.sku;
+  }
+
+  const categoryCodeMap = {
+    detergentes: "DET",
+    desinfectantes: "DES",
+    cocina: "COC",
+    baño: "BAN",
+    "artículos de limpieza": "ART"
+  };
+
+  const categoryCode = categoryCodeMap[product.categoria] || "QB";
+  return `${categoryCode}-${String(product.id).padStart(3, "0")}`;
+}
+
 function getSelectedPresentation(productId) {
   const select = productGrid.querySelector(`[data-presentation-select="${productId}"]`);
 
@@ -554,4 +595,48 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
+}
+
+function downloadQuoteExcel() {
+  if (quoteItems.length === 0) {
+    return;
+  }
+
+  const headers = ["SKU", "Producto", "Presentacion", "Cantidad"];
+  const rows = quoteItems
+    .map((item) => {
+      const product = allProducts.find((entry) => entry.id === item.id);
+
+      if (!product) {
+        return null;
+      }
+
+      return [
+        getProductSku(product),
+        product.nombre,
+        item.presentacion || getPresentationOptions(product)[0],
+        String(item.cantidad)
+      ];
+    })
+    .filter(Boolean);
+
+  const csvContent = [headers, ...rows]
+    .map((row) =>
+      row
+        .map((cell) => `"${String(cell).replaceAll('"', '""')}"`)
+        .join(",")
+    )
+    .join("\n");
+
+  const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  const date = new Date().toISOString().slice(0, 10);
+
+  link.href = url;
+  link.download = `cotizacion-quimica-brillante-${date}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }

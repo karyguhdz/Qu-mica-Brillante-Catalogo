@@ -83,16 +83,7 @@
             <p>Explora el catálogo, agrega productos y envía tu lista por WhatsApp.</p>
           </div>
 
-          <div class="filter-bar" id="filterBar" aria-label="Filtros de productos">
-            <button class="filter-chip is-active" data-filter="todos" type="button">Todos</button>
-            <button class="filter-chip" data-filter="detergentes" type="button">Detergentes</button>
-            <button class="filter-chip" data-filter="desinfectantes" type="button">Desinfectantes</button>
-            <button class="filter-chip" data-filter="cocina" type="button">Cocina</button>
-            <button class="filter-chip" data-filter="baño" type="button">Baño</button>
-            <button class="filter-chip" data-filter="artículos de limpieza" type="button">
-              Artículos de limpieza
-            </button>
-          </div>
+          <div class="filter-bar" id="filterBar" aria-label="Filtros de productos"></div>
 
           <div class="status-message" id="statusMessage">Cargando productos...</div>
           <div class="product-grid" id="productGrid" aria-live="polite"></div>
@@ -216,6 +207,9 @@
       <div class="quote-cart__actions">
         <button class="button button--ghost quote-cart__clear" id="quoteCartClear" type="button">
           Vaciar lista
+        </button>
+        <button class="button button--ghost quote-cart__excel" id="quoteCartExcel" type="button">
+          Descargar Excel
         </button>
         <a class="button quote-cart__send" id="quoteCartSend" href="#" target="_blank" rel="noreferrer">
           Enviar lista
