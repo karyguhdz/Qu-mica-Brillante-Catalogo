@@ -166,13 +166,7 @@ function createProductCard(product) {
 
   const presentationOptions = getPresentationOptions(product);
   const defaultPresentation = presentationOptions[0];
-
-  const imageList = Array.isArray(product.imagenes)
-    ? product.imagenes.filter(Boolean)
-    : product.imagen
-      ? [product.imagen]
-      : [];
-  const safeImageList = imageList.length > 0 ? imageList : [PLACEHOLDER_IMAGE];
+  const safeImageList = getProductImages(product);
 
   const image = document.createElement("img");
   image.src = safeImageList[0];
@@ -441,13 +435,7 @@ function renderQuoteCart() {
 function createQuoteCartItem(product, presentation, cantidad) {
   const item = document.createElement("li");
   item.className = "quote-cart__item";
-
-  const imageList = Array.isArray(product.imagenes)
-    ? product.imagenes.filter(Boolean)
-    : product.imagen
-      ? [product.imagen]
-      : [PLACEHOLDER_IMAGE];
-  const imagePath = imageList[0] || PLACEHOLDER_IMAGE;
+  const imagePath = getProductImages(product)[0] || PLACEHOLDER_IMAGE;
 
   item.innerHTML = `
     <img class="quote-cart__item-image" src="${imagePath}" alt="${escapeHtml(product.nombre)}" />
@@ -542,6 +530,22 @@ function getPresentationOptions(product) {
   }
 
   return [product.presentacion || "Presentación por confirmar"];
+}
+
+function getProductImages(product) {
+  if (Array.isArray(product.imagenes) && product.imagenes.length > 0) {
+    return product.imagenes.filter(Boolean);
+  }
+
+  if (Array.isArray(product.imagen) && product.imagen.length > 0) {
+    return product.imagen.filter(Boolean);
+  }
+
+  if (typeof product.imagen === "string" && product.imagen.trim()) {
+    return [product.imagen];
+  }
+
+  return [PLACEHOLDER_IMAGE];
 }
 
 function getProductSku(product) {
